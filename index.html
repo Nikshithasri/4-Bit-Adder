@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>4-Bit Binary Adder — Interactive Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">4-BA</div>
+        <div>
+          <div class="title">4-Bit Binary Adder</div>
+          <div class="subtitle">Interactive learning • Digital logic</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#theory">theory</a>
+        <a href="#circuit">circuit</a>
+        <a href="#truth">truth tables</a>
+        <a href="#simulation">simulation</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-card">
+        <h1>Understanding the 4-Bit Binary Adder</h1>
+        <p class="muted">
+          Explore the fundamental building block of digital computers. Learn how binary addition works with XOR, AND and OR gates — and test a live simulation below.
+        </p>
+
+        <div class="cta-row">
+          <button class="btn" onclick="document.getElementById('simulation').scrollIntoView({behavior:'smooth'})">
+            Try Simulation
+          </button>
+          <button class="btn secondary" onclick="document.getElementById('theory').scrollIntoView({behavior:'smooth'})">
+            Learn Theory
+          </button>
+        </div>
+
+        <div class="features">
+          <div class="tile">
+            <div class="big">01</div>
+            <h3>Binary Addition</h3>
+            <div class="muted">How computers add using bits</div>
+          </div>
+          <div class="tile">
+            <div class="big">⊕</div>
+            <h3>Logic Gates</h3>
+            <div class="muted">XOR, AND, OR</div>
+          </div>
+          <div class="tile">
+            <div class="big">Demo</div>
+            <h3>Interactive</h3>
+            <div class="muted">Step-by-step full adders</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card sim-card" id="simulation">
+        <div class="sim-header">
+          <div>
+            <div class="sim-title">Interactive Simulation</div>
+            <div class="muted small">Enter two 4-bit binary numbers and see steps</div>
+          </div>
+          <div class="muted small">C₀ = 0</div>
+        </div>
+
+        <div class="inputs-container">
+          <div class="bit-input">
+            <label class="small">First 4-bit number (A)</label>
+            <div class="bit-row" id="aInputs">
+              <input maxlength="1" placeholder="A3" data-index="3">
+              <input maxlength="1" placeholder="A2" data-index="2">
+              <input maxlength="1" placeholder="A1" data-index="1">
+              <input maxlength="1" placeholder="A0" data-index="0">
+            </div>
+          </div>
+
+          <div class="bit-input">
+            <label class="small">Second 4-bit number (B)</label>
+            <div class="bit-row" id="bInputs">
+              <input maxlength="1" placeholder="B3" data-index="3">
+              <input maxlength="1" placeholder="B2" data-index="2">
+              <input maxlength="1" placeholder="B1" data-index="1">
+              <input maxlength="1" placeholder="B0" data-index="0">
+            </div>
+          </div>
+
+          <div class="sim-actions">
+            <button class="btn" id="calcBtn">Calculate Sum</button>
+            <button class="btn secondary" id="clearBtn">Clear</button>
+            <div class="muted small">Result (5-bit):</div>
+          </div>
+
+          <div class="result" id="resultBox">
+            <div id="finalResult" class="final-result">— — — — —</div>
+            <div class="muted small">overflow → C₄</div>
+          </div>
+
+          <div>
+            <div class="log-title">Step-by-step</div>
+            <div class="log" id="log"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THEORY -->
+    <section id="theory">
+      <div class="grid-3">
+        <div class="card">
+          <h4>1. Half Adder</h4>
+          <div class="muted">Adds two single bits. Outputs Sum (S) = A ⊕ B and Carry (C) = A · B</div>
+        </div>
+        <div class="card">
+          <h4>2. Full Adder</h4>
+          <div class="muted">Takes A, B and Carry-in. Sum S = A ⊕ B ⊕ Cᵢₙ. Carry-out: Cₒᵤₜ = (A·B) + (Cᵢₙ·(A ⊕ B))</div>
+        </div>
+        <div class="card">
+          <h4>3. 4-Bit Adder (Ripple Carry)</h4>
+          <div class="muted">Four full adders cascade. Carry ripples from LSB to MSB; final carry C₄ indicates overflow.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIRCUIT + TABLE -->
+    <section class="section">
+      <div class="card" id="circuit">
+        <h3>Circuit Diagram</h3>
+        <p class="muted">Four full adders chained together (schematic simplified).</p>
+        <div class="diagram">[Circuit Diagram Placeholder]</div>
+      </div>
+
+      <div class="card" id="truth">
+        <h3>Truth Tables</h3>
+
+        <div class="table-group">
+          <h4>Half Adder</h4>
+          <table>
+            <thead><tr><th>A</th><th>B</th><th>Sum</th><th>Carry</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-group">
+          <h4>Full Adder</h4>
+          <table>
+            <thead><tr><th>A</th><th>B</th><th>Cin</th><th>Sum</th><th>Cout</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> 4-Bit Binary Adder Educational Project</div>
+      <div class="muted">Built with HTML, CSS & JavaScript</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
